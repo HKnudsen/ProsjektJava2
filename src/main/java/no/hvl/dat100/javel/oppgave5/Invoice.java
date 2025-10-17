@@ -2,6 +2,7 @@ package no.hvl.dat100.javel.oppgave5;
 
 import no.hvl.dat100.javel.oppgave3.Customer;
 import no.hvl.dat100.javel.oppgave2.MonthlyPower;
+import no.hvl.dat100.javel.oppgave3.PowerAgreementType;
 
 import java.util.Arrays;
 
@@ -16,20 +17,31 @@ public class Invoice {
 
 
     public Invoice(Customer c, String month, double[][] usage, double[][] power_prices) {
-
-        // TODO - konstruktør
-
+        this.c = c;
+        this.month = month;
+        this.usage = usage;
+        this.prices = power_prices;
+        this.amount = 0;
     }
 
     public void computeAmount() {
-
-        // TODO
-
+        if (c.getAgreement() == PowerAgreementType.SPOTPRICE) {
+            this.amount = MonthlyPower.computeSpotPrice(usage, prices);
+            } else if (c.getAgreement() == PowerAgreementType.NORGESPRICE) {
+            this.amount = MonthlyPower.computeNorgesPrice(usage);
+            } else if (c.getAgreement() == PowerAgreementType.POWERSUPPORT) {
+            this.amount = MonthlyPower.computeSpotPrice(usage,prices) - MonthlyPower.computePowerSupport(usage, prices);
+        }
     }
 
     public void printInvoice() {
-
-        // TODO
+        System.out.println("Customer number " + c.getCustomerId() + "\n" +
+                            "Name " + c.getName() + "\n " +
+                            "Email " + c.getEmail() + "\n" +
+                            "Agreement " + c.getAgreement() + "\n\n" +
+                            "Month: " + this.month + "\n" +
+                            "Usage:   " + MonthlyPower.computePowerUsage(usage) + " kWh\n" +
+                            "Amount:   " + this.amount + " NOK");
 
     }
 }

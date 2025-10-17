@@ -11,6 +11,9 @@ public class CustomerMain {
         System.out.println("==============");
         System.out.println();
 
+
+        Customer henrik = new Customer("Henrik Knudsen", "henrik@csolutions.no",1, PowerAgreementType.SPOTPRICE);
+        System.out.println(henrik);
         /*
         TODO
 

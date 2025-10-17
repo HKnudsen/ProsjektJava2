@@ -6,7 +6,7 @@ public class DailyPower {
     public static void printPowerPrices(double[] prices) {
 
         for (double price : prices) {
-            System.out.println(price +" kWh");
+            System.out.print(price +" NOK ");
         }
 
     }
@@ -14,7 +14,7 @@ public class DailyPower {
     // b) print power usage during a day
     public static void printPowerUsage(double[] usage) {
         for (double forbruk : usage) {
-            System.out.println(forbruk + " NOK");
+            System.out.println(" " +forbruk + " kWh");
         }
 
     }
@@ -70,8 +70,9 @@ public class DailyPower {
     public static double computeNorgesPrice(double[] usage) {
 
         double price = 0;
-
-        // TODO
+        for (int i = 0; i < usage.length; i++) {
+            price += (usage[i] * NORGESPRIS_KWH);
+        }
 
         return price;
     }
@@ -81,7 +82,11 @@ public class DailyPower {
 
         double temp_max = 0;
 
-        // TODO
+        for (int i = 0; i < usage.length; i++) {
+            if (temp_max < usage[i]) {
+                temp_max = usage[i];
+            }
+        }
 
         return temp_max;
     }
@@ -91,6 +96,11 @@ public class DailyPower {
         double average = 0;
 
         // TODO
+        for (int i = 0; i < usage.length;i++) {
+            average += usage[i];
+        }
+
+        average = average / usage.length;
 
         return average;
     }

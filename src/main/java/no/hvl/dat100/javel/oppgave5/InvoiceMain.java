@@ -13,6 +13,17 @@ public class InvoiceMain {
         System.out.println("==============");
         System.out.println();
 
+        Customer henrik = new Customer("Henrik","henrik@",1,PowerAgreementType.SPOTPRICE);
+        Invoice invoice = new Invoice(henrik,"January", MonthPowerData.powerusage_month,MonthPowerData.powerprices_month);
+        Invoice invoice1 = new Invoice(henrik,"February", MonthPowerData.powerusage_month,MonthPowerData.powerprices_month);
+        invoice.computeAmount();
+        invoice.printInvoice();
+        Invoice[] invoicer = {invoice, invoice1};
+
+        Invoices.processInvoices(invoicer);
+
+
+
         /*
         TODO
 
